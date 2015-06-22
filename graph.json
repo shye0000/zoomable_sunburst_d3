@@ -1,0 +1,804 @@
+{
+  "success": true,
+  "graph": {
+    "id": "b4b7546f-22d1-4fb5-affd-0b7ea1b4d76e",
+    "nodeList": [
+      {
+        "text": "SOHO<br/><a href=\"#\" class=\"overDatasetService\" onClick=\"sitools.user.utils.DatasetUtils.clickDatasetIcone('/soho', 'forms');return false;\"><img class=\"datasetochart_icon\" src=\"/sitools/common/res/images/icons/32x32/openSearch_32.png\" data-qtip=\"Query form\"></a>",
+        "leaf": false,
+        "type": "node",
+        "description": "",
+        "image": {
+          "type": "Image",
+          "url": "/sitools/upload/soho.png",
+          "mediaType": "Image"
+        },
+        "children": [
+          {
+            "text": "CDS<br/><a href=\"#\" class=\"overDatasetService\" onClick=\"sitools.user.utils.DatasetUtils.clickDatasetIcone('/soho/cds', 'data');return false;\"><img class=\"datasetochart_icon\" src=\"/sitools/common/res/images/icons/32x32/tree_datasets_32.png\" data-qtip=\"Display data\"></a>",
+            "leaf": false,
+            "type": "node",
+            "description": "",
+            "image": {
+              "type": "Image",
+              "url": "/sitools/upload/cds.jpg",
+              "mediaType": "Image"
+            },
+            "children": [
+              {
+                "text": "GIS",
+                "leaf": true,
+                "type": "dataset",
+                "datasetId": "a453c3c5-28dc-4488-993f-dff24cbee9b0",
+                "nbRecord": 17211,
+                "imageDs": "/sitools/upload/cds.jpg",
+                "readme": "",
+                "authorized": "true",
+                "status": "ACTIVE",
+                "visible": false,
+                "url": "/soho/cds/gis"
+              },
+              {
+                "text": "NIS",
+                "leaf": true,
+                "type": "dataset",
+                "datasetId": "c488dd91-2afe-480a-966c-33e8ce4592a9",
+                "nbRecord": 534932,
+                "imageDs": "/sitools/upload/cds.jpg",
+                "readme": "",
+                "authorized": "true",
+                "status": "ACTIVE",
+                "visible": false,
+                "url": "/soho/cds/nis"
+              }
+            ],
+            "nbRecord": 552143
+          },
+          {
+            "text": "CELIAS<br/><a href=\"#\" class=\"overDatasetService\" onClick=\"sitools.user.utils.DatasetUtils.clickDatasetIcone('/soho/celias', 'data');return false;\"><img class=\"datasetochart_icon\" src=\"/sitools/common/res/images/icons/32x32/tree_datasets_32.png\" data-qtip=\"Display data\"></a>",
+            "leaf": false,
+            "type": "node",
+            "description": "",
+            "image": {
+              "type": "Image",
+              "url": "/sitools/upload/celias.jpg",
+              "mediaType": "Image"
+            },
+            "children": [
+              {
+                "text": "CTOF",
+                "leaf": true,
+                "type": "dataset",
+                "datasetId": "5b52c58d-45c0-4f86-9882-2a0ce6ce7e91",
+                "nbRecord": 18351,
+                "imageDs": "/sitools/upload/celias.jpg",
+                "readme": "",
+                "authorized": "true",
+                "status": "ACTIVE",
+                "visible": false,
+                "url": "/soho/celias/ctof"
+              },
+              {
+                "text": "DPU",
+                "leaf": true,
+                "type": "dataset",
+                "datasetId": "d51519dc-6eb0-4da1-907e-2ef7a4bb765c",
+                "nbRecord": 5305,
+                "imageDs": "/sitools/upload/celias.jpg",
+                "readme": "",
+                "authorized": "true",
+                "status": "ACTIVE",
+                "visible": false,
+                "url": "/soho/celias/dpu"
+              },
+              {
+                "text": "HSTOF",
+                "leaf": true,
+                "type": "dataset",
+                "datasetId": "a9efc1e2-28f9-4a08-a385-c0734c28cc2c",
+                "nbRecord": 5276,
+                "imageDs": "/sitools/upload/celias.jpg",
+                "readme": "",
+                "authorized": "true",
+                "status": "ACTIVE",
+                "visible": false,
+                "url": "/soho/celias/hstof"
+              },
+              {
+                "text": "MTOF",
+                "leaf": true,
+                "type": "dataset",
+                "datasetId": "e2f424fa-11d3-4689-9f66-1e1cc56abc14",
+                "nbRecord": 26363,
+                "imageDs": "/sitools/upload/celias.jpg",
+                "readme": "",
+                "authorized": "true",
+                "status": "ACTIVE",
+                "visible": false,
+                "url": "/soho/celias/mtof"
+              },
+              {
+                "text": "PM",
+                "leaf": true,
+                "type": "dataset",
+                "datasetId": "e6ba67be-4d45-46a0-9b5b-e6d9965d8d2a",
+                "nbRecord": 14882,
+                "imageDs": "/sitools/upload/celias.jpg",
+                "readme": "",
+                "authorized": "true",
+                "status": "ACTIVE",
+                "visible": false,
+                "url": "/soho/celias/pm"
+              },
+              {
+                "text": "STOF",
+                "leaf": true,
+                "type": "dataset",
+                "datasetId": "cdaf3c90-798b-4a44-9095-31a118f41d0d",
+                "nbRecord": 5280,
+                "imageDs": "/sitools/upload/celias.jpg",
+                "readme": "",
+                "authorized": "true",
+                "status": "ACTIVE",
+                "visible": false,
+                "url": "/soho/celias/stof"
+              }
+            ],
+            "nbRecord": 75463
+          },
+          {
+            "text": "COSTEP<br/><a href=\"#\" class=\"overDatasetService\" onClick=\"sitools.user.utils.DatasetUtils.clickDatasetIcone('/soho/costep', 'data');return false;\"><img class=\"datasetochart_icon\" src=\"/sitools/common/res/images/icons/32x32/tree_datasets_32.png\" data-qtip=\"Display data\"></a>",
+            "leaf": false,
+            "type": "node",
+            "description": "",
+            "image": {
+              "type": "Image",
+              "url": "/sitools/upload/costep_000714.gif",
+              "mediaType": "Image"
+            },
+            "children": [
+              {
+                "text": "EPHIN",
+                "leaf": true,
+                "type": "dataset",
+                "datasetId": "8d603904-15e3-47be-bc44-9fb91604ae42",
+                "nbRecord": 25581,
+                "imageDs": "/sitools/upload/celias.jpg",
+                "readme": "",
+                "authorized": "true",
+                "status": "ACTIVE",
+                "visible": false,
+                "url": "/soho/costep/ephin"
+              },
+              {
+                "text": "LION",
+                "leaf": true,
+                "type": "dataset",
+                "datasetId": "e4dba8b4-868a-45af-8a65-6e661c418d59",
+                "nbRecord": 10252,
+                "imageDs": "/sitools/upload/celias.jpg",
+                "readme": "",
+                "authorized": "true",
+                "status": "ACTIVE",
+                "visible": false,
+                "url": "/soho/costep/lion"
+              }
+            ],
+            "nbRecord": 37863
+          },
+          {
+            "text": "EIT<br/><a href=\"#\" class=\"overDatasetService\" onClick=\"sitools.user.utils.DatasetUtils.clickDatasetIcone('/soho/eit', 'data');return false;\"><img class=\"datasetochart_icon\" src=\"/sitools/common/res/images/icons/32x32/tree_datasets_32.png\" data-qtip=\"Display data\"></a>",
+            "leaf": false,
+            "type": "node",
+            "description": "",
+            "image": {
+              "type": "Image",
+              "url": "/sitools/upload/soho_eit_304.jpg",
+              "mediaType": "Image"
+            },
+            "children": [
+            ],
+            "nbRecord": 519148
+          },
+          {
+            "text": "ERNE<br/><a href=\"#\" class=\"overDatasetService\" onClick=\"sitools.user.utils.DatasetUtils.clickDatasetIcone('/soho/erne', 'data');return false;\"><img class=\"datasetochart_icon\" src=\"/sitools/common/res/images/icons/32x32/tree_datasets_32.png\" data-qtip=\"Display data\"></a>",
+            "leaf": false,
+            "type": "node",
+            "description": "",
+            "image": {
+              "type": "Image",
+              "url": "/sitools/upload/erne_2.gif",
+              "mediaType": "Image"
+            },
+            "children": [
+              {
+                "text": "HED",
+                "leaf": true,
+                "type": "dataset",
+                "datasetId": "d617890f-5749-40db-916b-4b607a71375e",
+                "nbRecord": 11220,
+                "imageDs": "/sitools/upload/celias.jpg",
+                "readme": "",
+                "authorized": "true",
+                "status": "ACTIVE",
+                "visible": false,
+                "url": "/soho/erne/hed"
+              },
+              {
+                "text": "LED",
+                "leaf": true,
+                "type": "dataset",
+                "datasetId": "a84cc7f1-1ed4-49da-8f6b-82e0a1cf0f1f",
+                "nbRecord": 11224,
+                "imageDs": "/sitools/upload/celias.jpg",
+                "readme": "",
+                "authorized": "true",
+                "status": "ACTIVE",
+                "visible": false,
+                "url": "/soho/erne/led"
+              }
+            ],
+            "nbRecord": 28056
+          },
+          {
+            "text": "GOLF<br/><a href=\"#\" class=\"overDatasetService\" onClick=\"sitools.user.utils.DatasetUtils.clickDatasetIcone('/soho/golf', 'data');return false;\"><img class=\"datasetochart_icon\" src=\"/sitools/common/res/images/icons/32x32/tree_datasets_32.png\" data-qtip=\"Display data\"></a>",
+            "leaf": false,
+            "type": "node",
+            "description": "",
+            "image": {
+              "type": "Image",
+              "url": "/sitools/upload/slice1_specgolf.gif",
+              "mediaType": "Image"
+            },
+            "children": [
+              {
+                "text": "FSmain",
+                "leaf": true,
+                "type": "dataset",
+                "datasetId": "a469af6b-20b2-4929-875a-1f7b4a338938",
+                "nbRecord": 6081,
+                "imageDs": "/sitools/upload/celias.jpg",
+                "readme": "",
+                "authorized": "true",
+                "status": "ACTIVE",
+                "visible": false,
+                "url": "/soho/golf/fsmain"
+              },
+              {
+                "text": "PM1",
+                "leaf": true,
+                "type": "dataset",
+                "datasetId": "14631219-102e-410d-a3c7-960aed9e6669",
+                "nbRecord": 4,
+                "imageDs": "/sitools/upload/celias.jpg",
+                "readme": "",
+                "authorized": "true",
+                "status": "ACTIVE",
+                "visible": false,
+                "url": "/soho/golf/pm1"
+              },
+              {
+                "text": "PM2",
+                "leaf": true,
+                "type": "dataset",
+                "datasetId": "78c3813f-d850-4710-b819-e141224bf6a8",
+                "nbRecord": 4,
+                "imageDs": "/sitools/upload/celias.jpg",
+                "readme": "",
+                "authorized": "true",
+                "status": "ACTIVE",
+                "visible": false,
+                "url": "/soho/golf/pm2"
+              },
+              {
+                "text": "PM1-PM2",
+                "leaf": true,
+                "type": "dataset",
+                "datasetId": "08edbb22-70a9-4b41-83e0-26b73525d1dc",
+                "nbRecord": 1,
+                "imageDs": "/sitools/upload/celias.jpg",
+                "readme": "",
+                "authorized": "true",
+                "status": "ACTIVE",
+                "visible": false,
+                "url": "/soho/golf/pm1pm2"
+              }
+            ],
+            "nbRecord": 6090
+          },
+          {
+            "text": "LASCO<br/><a href=\"#\" class=\"overDatasetService\" onClick=\"sitools.user.utils.DatasetUtils.clickDatasetIcone('/soho/lasco', 'data');return false;\"><img class=\"datasetochart_icon\" src=\"/sitools/common/res/images/icons/32x32/tree_datasets_32.png\" data-qtip=\"Display data\"></a>",
+            "leaf": false,
+            "type": "node",
+            "description": "",
+            "image": {
+              "type": "Image",
+              "url": "/sitools/upload/lasco.gif",
+              "mediaType": "Image"
+            },
+            "children": [
+              {
+                "text": "C1",
+                "leaf": true,
+                "type": "dataset",
+                "datasetId": "9cac81ac-d580-431a-8fa8-13d815ac1e08",
+                "nbRecord": 122009,
+                "imageDs": "/sitools/upload/lasco.gif",
+                "readme": "",
+                "authorized": "true",
+                "status": "ACTIVE",
+                "visible": false,
+                "url": "/soho/lasco/c1"
+              },
+              {
+                "text": "C2",
+                "leaf": true,
+                "type": "dataset",
+                "datasetId": "eb3f4c4b-2059-4211-9afa-c667a780c2fd",
+                "nbRecord": 615853,
+                "imageDs": "/sitools/upload/lasco.gif",
+                "readme": "",
+                "authorized": "true",
+                "status": "ACTIVE",
+                "visible": false,
+                "url": "/soho/lasco/c2"
+              },
+              {
+                "text": "C3",
+                "leaf": true,
+                "type": "dataset",
+                "datasetId": "1d6d7589-29f4-46b7-8dac-1f1ac0c6e6c7",
+                "nbRecord": 431741,
+                "imageDs": "/sitools/upload/lasco.gif",
+                "readme": "",
+                "authorized": "true",
+                "status": "ACTIVE",
+                "visible": false,
+                "url": "/soho/lasco/c3"
+              }
+            ],
+            "nbRecord": 1169604
+          },
+          {
+            "text": "MDI",
+            "leaf": true,
+            "type": "dataset",
+            "datasetId": "ab112122-591b-468a-b256-af4971daf14b",
+            "nbRecord": 96401,
+            "imageDs": "/sitools/upload/sunspots_soho_mdi.gif",
+            "readme": "",
+            "authorized": "true",
+            "status": "ACTIVE",
+            "visible": false,
+            "url": "/soho/mdi"
+          },
+          {
+            "text": "SUMER<br/><a href=\"#\" class=\"overDatasetService\" onClick=\"sitools.user.utils.DatasetUtils.clickDatasetIcone('/soho/sumer', 'data');return false;\"><img class=\"datasetochart_icon\" src=\"/sitools/common/res/images/icons/32x32/tree_datasets_32.png\" data-qtip=\"Display data\"></a>",
+            "leaf": false,
+            "type": "node",
+            "description": "",
+            "image": {
+              "type": "Image",
+              "url": "/sitools/upload/sun-sumer-c4.jpg",
+              "mediaType": "Image"
+            },
+            "children": [
+              {
+                "text": "A",
+                "leaf": true,
+                "type": "dataset",
+                "datasetId": "0c58fe6c-e3b9-475e-b189-6c749f327884",
+                "nbRecord": 73313,
+                "imageDs": "/sitools/upload/lasco.gif",
+                "readme": "",
+                "authorized": "true",
+                "status": "ACTIVE",
+                "visible": false,
+                "url": "/soho/sumer/a"
+              },
+              {
+                "text": "B",
+                "leaf": true,
+                "type": "dataset",
+                "datasetId": "02819e09-c404-4db2-8105-0bdb2e6b6151",
+                "nbRecord": 49122,
+                "imageDs": "/sitools/upload/lasco.gif",
+                "readme": "",
+                "authorized": "true",
+                "status": "ACTIVE",
+                "visible": false,
+                "url": "/soho/sumer/b"
+              },
+              {
+                "text": "RSC",
+                "leaf": true,
+                "type": "dataset",
+                "datasetId": "d20a1f65-ca7c-49c6-82e3-be1f2d801b81",
+                "nbRecord": 1344,
+                "imageDs": "/sitools/upload/lasco.gif",
+                "readme": "",
+                "authorized": "true",
+                "status": "ACTIVE",
+                "visible": false,
+                "url": "/soho/sumer/rsc"
+              }
+            ],
+            "nbRecord": 124174
+          },
+          {
+            "text": "SWAN<br/><a href=\"#\" class=\"overDatasetService\" onClick=\"sitools.user.utils.DatasetUtils.clickDatasetIcone('/soho/swan', 'data');return false;\"><img class=\"datasetochart_icon\" src=\"/sitools/common/res/images/icons/32x32/tree_datasets_32.png\" data-qtip=\"Display data\"></a>",
+            "leaf": false,
+            "type": "node",
+            "description": "",
+            "image": {
+              "type": "Image",
+              "url": "/sitools/upload/swan.gif",
+              "mediaType": "Image"
+            },
+            "children": [
+              {
+                "text": "PLUS-Z",
+                "leaf": true,
+                "type": "dataset",
+                "datasetId": "52f73e34-9479-4927-8e06-8af6263971c9",
+                "nbRecord": 2760,
+                "imageDs": "/sitools/upload/lasco.gif",
+                "readme": "",
+                "authorized": "true",
+                "status": "ACTIVE",
+                "visible": false,
+                "url": "/soho/swan/plusz"
+              },
+              {
+                "text": "MOINS-Z",
+                "leaf": true,
+                "type": "dataset",
+                "datasetId": "51c3bcc4-9ec7-4582-b64c-c9151cd07e70",
+                "nbRecord": 2707,
+                "imageDs": "/sitools/upload/lasco.gif",
+                "readme": "",
+                "authorized": "true",
+                "status": "ACTIVE",
+                "visible": false,
+                "url": "/soho/swan/moinsz"
+              },
+              {
+                "text": "PLUS-Z-MOINS-Z",
+                "leaf": true,
+                "type": "dataset",
+                "datasetId": "7063635e-feb3-4739-a5d8-d9801ee09a0d",
+                "nbRecord": 5073,
+                "imageDs": "/sitools/upload/lasco.gif",
+                "readme": "",
+                "authorized": "true",
+                "status": "ACTIVE",
+                "visible": false,
+                "url": "/soho/swan/pluszmoinz"
+              }
+            ],
+            "nbRecord": 10544
+          },
+          {
+            "text": "UVCS<br/><a href=\"#\" class=\"overDatasetService\" onClick=\"sitools.user.utils.DatasetUtils.clickDatasetIcone('/soho/uvcs', 'data');return false;\"><img class=\"datasetochart_icon\" src=\"/sitools/common/res/images/icons/32x32/tree_datasets_32.png\" data-qtip=\"Display data\"></a>",
+            "leaf": false,
+            "type": "node",
+            "description": "",
+            "image": {
+              "type": "Image",
+              "url": "/sitools/upload/uvcs.gif",
+              "mediaType": "Image"
+            },
+            "children": [
+              {
+                "text": "LYA",
+                "leaf": true,
+                "type": "dataset",
+                "datasetId": "fac90391-d19b-40d4-adf7-1351d82aa2b4",
+                "nbRecord": 20830,
+                "imageDs": "/sitools/upload/lasco.gif",
+                "readme": "",
+                "authorized": "true",
+                "status": "ACTIVE",
+                "visible": false,
+                "url": "/soho/uvcs/lya"
+              },
+              {
+                "text": "OVI",
+                "leaf": true,
+                "type": "dataset",
+                "datasetId": "d4733298-b50c-4caf-99ca-67523941beb1",
+                "nbRecord": 107652,
+                "imageDs": "/sitools/upload/lasco.gif",
+                "readme": "",
+                "authorized": "true",
+                "status": "ACTIVE",
+                "visible": false,
+                "url": "/soho/uvcs/ovi"
+              },
+              {
+                "text": "VLD",
+                "leaf": true,
+                "type": "dataset",
+                "datasetId": "2a46d70b-ab93-415c-8c9d-2e3677b74d5d",
+                "nbRecord": 28127,
+                "imageDs": "/sitools/upload/lasco.gif",
+                "readme": "",
+                "authorized": "true",
+                "status": "ACTIVE",
+                "visible": false,
+                "url": "/soho/uvcs/vld"
+              }
+            ],
+            "nbRecord": 156609
+          },
+          {
+            "text": "VIRGO<br/><a href=\"#\" class=\"overDatasetService\" onClick=\"sitools.user.utils.DatasetUtils.clickDatasetIcone('/soho/virgo', 'data');return false;\"><img class=\"datasetochart_icon\" src=\"/sitools/common/res/images/icons/32x32/tree_datasets_32.png\" data-qtip=\"Display data\"></a>",
+            "leaf": false,
+            "type": "node",
+            "description": "",
+            "image": {
+              "type": "Image",
+              "url": "/sitools/upload/virgo_level1.png",
+              "mediaType": "Image"
+            },
+            "children": [
+              {
+                "text": "DIARAD",
+                "leaf": true,
+                "type": "dataset",
+                "datasetId": "9bdd6dd8-76fe-4dda-8e1f-68787d1b1366",
+                "nbRecord": 6182,
+                "imageDs": "/sitools/upload/lasco.gif",
+                "readme": "",
+                "authorized": "true",
+                "status": "ACTIVE",
+                "visible": false,
+                "url": "/soho/virgo/diarad"
+              },
+              {
+                "text": "LOI",
+                "leaf": true,
+                "type": "dataset",
+                "datasetId": "120b1732-786e-412e-83f8-3bf7a90e9e94",
+                "nbRecord": 6088,
+                "imageDs": "/sitools/upload/lasco.gif",
+                "readme": "",
+                "authorized": "true",
+                "status": "ACTIVE",
+                "visible": false,
+                "url": "/soho/virgo/loi"
+              },
+              {
+                "text": "PMOD",
+                "leaf": true,
+                "type": "dataset",
+                "datasetId": "37765443-830b-4571-97a5-e9e488931d46",
+                "nbRecord": 5818,
+                "imageDs": "/sitools/upload/lasco.gif",
+                "readme": "",
+                "authorized": "true",
+                "status": "ACTIVE",
+                "visible": false,
+                "url": "/soho/virgo/pmod"
+              },
+              {
+                "text": "SPM",
+                "leaf": true,
+                "type": "dataset",
+                "datasetId": "a4b23353-42b6-4f89-a41e-b08dc7b27ebb",
+                "nbRecord": 6201,
+                "imageDs": "/sitools/upload/lasco.gif",
+                "readme": "",
+                "authorized": "true",
+                "status": "ACTIVE",
+                "visible": false,
+                "url": "/soho/virgo/spm"
+              }
+            ],
+            "nbRecord": 30482
+          }
+        ],
+        "nbRecord": 2806577
+      },
+      {
+        "text": "STEREO<br/><a href=\"#\" class=\"overDatasetService\" onClick=\"sitools.user.utils.DatasetUtils.clickDatasetIcone('/stereo', 'forms');return false;\"><img class=\"datasetochart_icon\" src=\"/sitools/common/res/images/icons/32x32/openSearch_32.png\" data-qtip=\"Query form\"></a>",
+        "leaf": false,
+        "type": "node",
+        "description": "",
+        "image": {
+          "type": "Image",
+          "url": "/sitools/upload/Anniversary-NASA-STEREO-Satellites-Turn-5-2.jpg",
+          "mediaType": "Image"
+        },
+        "children": [
+          {
+            "text": "SECCHI-EUVI",
+            "leaf": true,
+            "type": "dataset",
+            "datasetId": "e899d146-6c8c-4358-a834-4de25e5109b6",
+            "nbRecord": 4753656,
+            "imageDs": "/sitools/upload/euvi.png",
+            "readme": "",
+            "authorized": "true",
+            "status": "ACTIVE",
+            "visible": false,
+            "url": "/stereo/secchi_euvi"
+          },
+          {
+            "text": "SECCHI-COR1",
+            "leaf": true,
+            "type": "dataset",
+            "datasetId": "bd1c7bc1-a721-47d8-90a7-66aae44245d1",
+            "nbRecord": 4253922,
+            "imageDs": "/sitools/upload/cor1.jpg",
+            "readme": "",
+            "authorized": "true",
+            "status": "ACTIVE",
+            "visible": false,
+            "url": "/stereo/secchi_cor1"
+          },
+          {
+            "text": "SECCHI-COR2",
+            "leaf": true,
+            "type": "dataset",
+            "datasetId": "79a94bc7-ce16-4dff-baab-2d4dab17a98e",
+            "nbRecord": 1526220,
+            "imageDs": "/sitools/upload/cor2.png",
+            "readme": "",
+            "authorized": "true",
+            "status": "ACTIVE",
+            "visible": false,
+            "url": "/stereo/secchi_cor2"
+          },
+          {
+            "text": "SECCHI-HI1",
+            "leaf": true,
+            "type": "dataset",
+            "datasetId": "f86a061d-8614-4964-a473-c8d0efa157a9",
+            "nbRecord": 227334,
+            "imageDs": "/sitools/upload/hi1.png",
+            "readme": "",
+            "authorized": "true",
+            "status": "ACTIVE",
+            "visible": false,
+            "url": "/stereo/secchi_hi1"
+          },
+          {
+            "text": "SECCHI-HI2",
+            "leaf": true,
+            "type": "dataset",
+            "datasetId": "8938e6d3-a0be-4238-9123-e24c936699cc",
+            "nbRecord": 111387,
+            "imageDs": "/sitools/upload/hi2.png",
+            "readme": "",
+            "authorized": "true",
+            "status": "ACTIVE",
+            "visible": false,
+            "url": "/stereo/secchi_hi2"
+          }
+        ],
+        "nbRecord": 10872519
+      },
+      {
+        "text": "PICARD<br/><a href=\"#\" class=\"overDatasetService\" onClick=\"sitools.user.utils.DatasetUtils.clickDatasetIcone('/picard', 'forms');return false;\"><img class=\"datasetochart_icon\" src=\"/sitools/common/res/images/icons/32x32/openSearch_32.png\" data-qtip=\"Query form\"></a>",
+        "leaf": false,
+        "type": "node",
+        "description": "",
+        "image": {
+          "type": "Image",
+          "url": "/sitools/upload/satellite_picard.jpg",
+          "mediaType": "Image"
+        },
+        "children": [
+          {
+            "text": "SODISM",
+            "leaf": true,
+            "type": "dataset",
+            "datasetId": "1196e72c-4c34-45d8-a62e-5d2c666496b2",
+            "nbRecord": 5384119,
+            "imageDs": "/sitools/upload/sodism.png",
+            "readme": "",
+            "authorized": "true",
+            "status": "ACTIVE",
+            "visible": false,
+            "url": "/picard/sodism"
+          },
+          {
+            "text": "SODISM2",
+            "leaf": true,
+            "type": "dataset",
+            "datasetId": "66c3c51f-8c18-4825-a455-edaa6e95054f",
+            "nbRecord": 97327,
+            "imageDs": "/sitools/upload/soidsm2393.png",
+            "readme": "",
+            "authorized": "true",
+            "status": "ACTIVE",
+            "visible": false,
+            "url": "/picard/sodism2"
+          },
+          {
+            "text": "PREMOS",
+            "leaf": true,
+            "type": "dataset",
+            "datasetId": "4e661693-7ca9-42f4-94ec-1437ed50c52f",
+            "nbRecord": 10409,
+            "imageDs": "/sitools/upload/premos_vue_artiste.gif",
+            "readme": "",
+            "authorized": "true",
+            "status": "ACTIVE",
+            "visible": false,
+            "url": "/picard/premos"
+          }
+        ],
+        "nbRecord": 5492064
+      },
+      {
+        "text": "SPIRIT<br/><a href=\"#\" class=\"overDatasetService\" onClick=\"sitools.user.utils.DatasetUtils.clickDatasetIcone('/spirit', 'forms');return false;\"><img class=\"datasetochart_icon\" src=\"/sitools/common/res/images/icons/32x32/openSearch_32.png\" data-qtip=\"Query form\"></a>",
+        "leaf": false,
+        "type": "node",
+        "description": "",
+        "image": {
+          "type": "Image",
+          "url": "/sitools/upload/coronas-f.jpg",
+          "mediaType": "Image"
+        },
+        "children": [
+          {
+            "text": "HR2-175A",
+            "leaf": true,
+            "type": "dataset",
+            "datasetId": "eb0ad048-4c42-458c-841d-2f748015fa90",
+            "nbRecord": 39730,
+            "imageDs": "/sitools/upload/spirit175.png",
+            "readme": "",
+            "authorized": "true",
+            "status": "ACTIVE",
+            "visible": false,
+            "url": "/spirit/hr2_175a"
+          },
+          {
+            "text": "HR2-304A",
+            "leaf": true,
+            "type": "dataset",
+            "datasetId": "d8b3acd6-9076-483f-80d6-a414f984d9ed",
+            "nbRecord": 40380,
+            "imageDs": "/sitools/upload/spirit304.png",
+            "readme": "",
+            "authorized": "true",
+            "status": "ACTIVE",
+            "visible": false,
+            "url": "/spirit/hr2_304a"
+          }
+        ],
+        "nbRecord": 80110
+      },
+      {
+        "text": "TRACE<br/><a href=\"#\" class=\"overDatasetService\" onClick=\"sitools.user.utils.DatasetUtils.clickDatasetIcone('/trace', 'forms');return false;\"><img class=\"datasetochart_icon\" src=\"/sitools/common/res/images/icons/32x32/openSearch_32.png\" data-qtip=\"Query form\"></a>",
+        "leaf": false,
+        "type": "node",
+        "description": "",
+        "image": {
+          "type": "Image",
+          "url": "/sitools/upload/506998main_TRACE_artist_rendition.jpeg",
+          "mediaType": "Image"
+        },
+        "children": [
+          {
+            "text": "TRACE",
+            "leaf": true,
+            "type": "dataset",
+            "datasetId": "05a5eea6-f527-409c-952a-4a499341c92b",
+            "nbRecord": 614015,
+            "imageDs": "/sitools/upload/trace.gif",
+            "readme": "",
+            "authorized": "true",
+            "status": "ACTIVE",
+            "visible": false,
+            "url": "/trace"
+          }
+        ],
+        "nbRecord": 614015
+      }
+    ]
+  }
+}

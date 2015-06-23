@@ -2,7 +2,6 @@
 <meta charset="utf-8">
 <style>
 
-@import "style.css";
 path {
     cursor: pointer;
     stroke: #fff;
@@ -26,13 +25,14 @@ p#intro {
 }
 
 #vis {
-	border-radius: 50%;
+  border-radius: 50%;
 }
+
 </style>
 <body>
 <h1>Solar Projects - IDOC</h1>
 <div id="vis"></div>
-<script src="d3.v3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js" charset="utf-8"></script>
 <script>
 var w = window,
     d = document,
@@ -131,7 +131,8 @@ d3.json("graph.json", function(error, json) {
             angle = x(d.x + d.dx / 2) * 180 / Math.PI - 90,
             rotate = angle + (multiline ? -.5 : 0);
         return "rotate(" + rotate + ")translate(" + (y(d.y) + padding) + ")rotate(" + (angle > 90 ? -180 : 0) + ")";
-      });
+      })
+      .on("click", click);
   var image = vis.selectAll("image").data(nodes);    
   var imageEnter = image.enter().append("image")
       //.attr("xlink:href","#")

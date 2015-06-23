@@ -41,7 +41,7 @@ var w = window,
 //console.log(w.innerHeight);    
 if ((w.innerHeight || e.clientHeight || g.clientHeight) > (w.innerWidth || e.clientWidth || g.clientWidth)) {
   //alert("shit");
-  var width = (w.innerWidth || e.clientWidth || g.clientWidth)/1.2 ,
+  var width = (w.innerWidth || e.clientWidth || g.clientWidth)/1.01,
       height = width;
 } else {
   var height = (w.innerHeight || e.clientHeight || g.clientHeight)/1.2 ,
@@ -100,7 +100,7 @@ d3.json("graph.json", function(error, json) {
       .on("touchenter", mouseover)
       .on("touchstart", mouseover)
       .on("click", click);
-
+      
   var tooltips= pathEnter
     .append("title")
     .text(function(d) { return d.text });
@@ -113,22 +113,61 @@ d3.json("graph.json", function(error, json) {
         return brightness(d3.rgb(d.color)) < 125 ? "#eee" : "#000";
       })
       .attr("text-anchor", function(d, i) {
+        if (i == 0) {
+          return "middle";
+        }
         return x(d.x + d.dx / 2) > Math.PI ? "end" : "start";
       })
       .attr("dy", ".2em")
+      .attr("dx", function(d, i){
+        if (i == 0) return 0;
+        return x(d.x + d.dx / 2) > Math.PI ? "-2em" : "2em";
+      })
       .attr("transform", function(d, i) {
+        if (i == 0) {
+          return null;
+        }
+        var multiline = (d.text || "").split(" ").length > 1,
+            angle = x(d.x + d.dx / 2) * 180 / Math.PI - 90,
+            rotate = angle + (multiline ? -.5 : 0);
+        return "rotate(" + rotate + ")translate(" + (y(d.y) + padding) + ")rotate(" + (angle > 90 ? -180 : 0) + ")";
+      });
+  var image = vis.selectAll("image").data(nodes);    
+  var imageEnter = image.enter().append("image")
+      //.attr("xlink:href","#")
+      .attr("xlink:href",function(d, i){
+        if (i == 0) return "";
+        else {
+          return d.type == "node" && (d.text.search("Query form")>-1) ? "1435069352_search.png" : "1435074087_098_Spreadsheet.png";
+        }
+      })
+      .attr('width', "1em")
+      .attr('height', "1em")
+      .style("fill-opacity", 1)
+      .style("fill", function(d) {
+        return brightness(d3.rgb(d.color)) < 125 ? "#eee" : "#000";
+      })
+      .style('cursor','pointer')
+      .attr("y", "-0.5em")
+      .attr("x", function(d){
+        
+        return x(d.x + d.dx / 2) > Math.PI ? "-1.5em" : "0.5em";
+      })
+      .attr("transform", function(d, i) {
+        if (i == 0) {
+          return null;
+        }
         var multiline = (d.text || "").split(" ").length > 1,
             angle = x(d.x + d.dx / 2) * 180 / Math.PI - 90,
             rotate = angle + (multiline ? -.5 : 0);
         return "rotate(" + rotate + ")translate(" + (y(d.y) + padding) + ")rotate(" + (angle > 90 ? -180 : 0) + ")";
       })
-      .on("click", click);
-  
-  textEnter.append("tspan")
+      .on("click", function(d,i) { sitools.user.utils.DatasetUtils.clickDatasetIcone('/soho', 'forms'); });
+  var tspan = textEnter.append("tspan")
       .attr("x", 0)
       .style("font-weight", function(d, i) { return i == 0 ? "bold" : ""; })
-      .style("font-size", function(d, i) { return i == 0 ? "1.3vh" : "1.2vh"; })
-      .text(function(d, i) { if (i == 0) { return 'SOLAR'; } return d.depth ? d.text.split("<br/>")[0].split(" ")[0] : ""; });
+      .style("font-size", function(d, i) { return i == 0 ? "1.2em" : "1em"; })
+      .text(function(d, i) { if (i == 0) { return 'SOLAR'; } return d.depth ? d.text.split("<br/>")[0] : ""; });
   
   /*textEnter.append("tspan")
       .attr("x", 0)
@@ -158,11 +197,21 @@ d3.json("graph.json", function(error, json) {
       .transition()
         .duration(duration)
         .attrTween("text-anchor", function(d, i) {
+          if (i == 0) {
+            return null;
+          }
           return function() {
             return x(d.x + d.dx / 2) > Math.PI ? "end" : "start";
           };
         })
+        .attr("dx", function(d, i){
+            if (i == 0) return 0;
+            else return x(d.x + d.dx / 2) > Math.PI ? "-2em" : "2em";
+        })
         .attrTween("transform", function(d, i) {
+          if (i == 0) {
+            return null;
+          }
           var multiline = (d.text || "").split(" ").length > 1;
           return function() {
             var angle = x(d.x + d.dx / 2) * 180 / Math.PI - 90,
@@ -174,6 +223,42 @@ d3.json("graph.json", function(error, json) {
         .each("end", function(e) {
           d3.select(this).style("visibility", isParentOf(d, e) ? null : "hidden");
         });
+    setTimeout(function(){ 
+      text.attr("dx", function(d, i){
+        if (i == 0) return 0;
+        else return x(d.x + d.dx / 2) > Math.PI ? "-2em" : "2em";
+      });
+    }, 550);
+    image.style("visibility", function(e) {
+          return isParentOf(d, e) ? null : d3.select(this).style("visibility");
+        })
+      .transition()
+        .duration(duration)
+        .attr("y", "-0.5em")
+        .attr("x", function(d){
+          return x(d.x + d.dx / 2) > Math.PI ? "-1.5em" : "0.5em";
+        })
+        .attrTween("transform", function(d, i) {
+          if (i == 0) {
+            return null;
+          }
+          var multiline = (d.text || "").split(" ").length > 1;
+          return function() {
+            var angle = x(d.x + d.dx / 2) * 180 / Math.PI - 90,
+                rotate = angle + (multiline ? -.5 : 0);
+            return "rotate(" + rotate + ")translate(" + (y(d.y) + padding) + ")rotate(" + (angle > 90 ? -180 : 0) + ")";
+          };
+        })
+        .style("fill-opacity", function(e) { return isParentOf(d, e) ? 1 : 1e-6; })
+        .each("end", function(e) {
+          d3.select(this).style("visibility", isParentOf(d, e) ? null : "hidden");
+        });
+    setTimeout(function(){ 
+      image.attr("x", function(d){
+        return x(d.x + d.dx / 2) > Math.PI ? "-1.5em" : "0.5em";;
+      });
+    }, 550);     
+
   	}
 
 
@@ -200,26 +285,14 @@ function mouseleave(d) {
   d3.selectAll("text")
       .transition()
       .duration(500)
+      .style("opacity", 1);
+  d3.selectAll("image")
+      .transition()
+      .duration(500)
       .style("opacity", 1);    
-
-  //d3.select("#explanation")
-    //  .style("visibility", "hidden");
 }
 
 function mouseover(d) {
-
-  //var percentage = (100 * d.value / totalSize).toPrecision(3);
-  //var percentageString = percentage + "%";
-  //if (percentage < 0.1) {
-  //  percentageString = "< 0.1%";
-  //}
-
-  //d3.select("#percentage")
-  //    .text(percentageString);
-
-  //d3.select("#explanation")
-  //    .style("visibility", "");
-
   var sequenceArray = getAncestors(d);
   //updateBreadcrumbs(sequenceArray, percentageString);
 
@@ -228,6 +301,8 @@ function mouseover(d) {
       .style("opacity", 0.3);
   d3.selectAll("text")
       .style("opacity", 0.3);
+  d3.selectAll("image")
+      .style("opacity", 0.3);    
   // Then highlight only those that are an ancestor of the current segment.
   vis.selectAll("path")
       .filter(function(node) {
@@ -238,7 +313,12 @@ function mouseover(d) {
       .filter(function(node) {
                 return (sequenceArray.indexOf(node) >= 0);
               })
-      .style("opacity", 1);    
+      .style("opacity", 1);
+  vis.selectAll("image")
+      .filter(function(node) {
+                return (sequenceArray.indexOf(node) >= 0);
+              })
+      .style("opacity", 1);        
 }
 function isParentOf(p, c) {
   if (p === c) return true;

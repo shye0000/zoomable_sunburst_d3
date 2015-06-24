@@ -34,13 +34,18 @@ p#intro {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js" charset="utf-8"></script>
 <script>
 window.onresize = update;
-draw();
+var json=[];
+d3.json("graph.json", function(error, j) {
+  json = j;
+  draw(j);
+});
+
 function update() {
   d3.select("svg").remove();
-  draw();
+  draw(json);
 }
 
-function draw(){
+function draw(json){
   var w = window,
       d = document,
       e = d.documentElement,
@@ -112,7 +117,7 @@ var arc = d3.svg.arc()
     .innerRadius(function(d) { return Math.max(0, d.y ? y(d.y) : d.y); })
     .outerRadius(function(d) { return Math.max(0, y(d.y + d.dy)); });
 
-d3.json("graph.json", function(error, json) {
+//d3.json("graph.json", function(error, json) {
 //d3.json("http://localhost:9292/idoc-solar-test.ias.u-psud.fr/project/solar/graph?media=json", function(error, json) {
   d3.select("#container").on("mouseleave", mouseleave);
         d3.select("#container").on("touchend", mouseleave);
@@ -340,7 +345,7 @@ d3.json("graph.json", function(error, json) {
     }
 
 
-});
+//});
 
 function mouseleave(d) {
   // Hide the breadcrumb trail

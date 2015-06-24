@@ -115,7 +115,7 @@ var arc = d3.svg.arc()
 d3.json("graph.json", function(error, json) {
 //d3.json("http://localhost:9292/idoc-solar-test.ias.u-psud.fr/project/solar/graph?media=json", function(error, json) {
   d3.select("#container").on("mouseleave", mouseleave);
-        //d3.select("#container").on("touchend", mouseleave);
+        d3.select("#container").on("touchend", mouseleave);
         json.graph.text = 'Solar';
         json.graph.children = json.graph.nodeList;
         var nodes = partition.nodes({children: json.graph.children});
@@ -126,8 +126,8 @@ d3.json("graph.json", function(error, json) {
             .attr("fill-rule", "evenodd")
             .style("fill", function(d, i) { if (i==0) return d.color = '#FDB813'; else return d.color = color((d.children ? d : d.parent).text);})
             .on("mouseover", mouseover)
-            //.on("touchenter", mouseover)
-            //.on("touchstart", mouseover)
+            .on("touchenter", mouseover)
+            .on("touchstart", mouseover)
             .on("click", click);
       
         var tooltips= pathEnter

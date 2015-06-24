@@ -30,21 +30,54 @@ p#intro {
 
 </style>
 <body>
-<h1>Solar Projects - IDOC</h1>
 <div id="vis"></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js" charset="utf-8"></script>
 <script>
-var w = window,
-    d = document,
-    e = d.documentElement,
-    g = d.getElementsByTagName('body')[0];
-//console.log(w.innerHeight);    
-if ((w.innerHeight || e.clientHeight || g.clientHeight) > (w.innerWidth || e.clientWidth || g.clientWidth)) {
+window.onresize = update;
+draw();
+function update() {
+  d3.select("svg").remove();
+  draw();
+}
+
+function draw(){
+  var w = window,
+      d = document,
+      e = d.documentElement,
+      g = d.getElementsByTagName('body')[0];
+  var window_w = w.innerWidth || e.clientWidth || g.clientWidth;
+      window_h = w.innerHeight || e.clientHeight || g.clientHeight
+//console.log(w.innerHeight);
+
+  if (Math.min(window_w,window_h) >= 400 && Math.min(window_w,window_h) < 450) {
+             fontSize = '5.5px';
+        }
+
+  if (Math.min(window_w,window_h) >= 450 && Math.min(window_w,window_h) < 500) {
+             fontSize = '6.5px';
+        }
+
+  if (Math.min(window_w,window_h) >= 500 && Math.min(window_w,window_h) < 560) {
+       fontSize = '8px';
+  }
+  if (Math.min(window_w,window_h) >= 560 && Math.min(window_w,window_h) < 600) {
+             fontSize = '9px';
+        }
+  if (Math.min(window_w,window_h) >= 600 && Math.min(window_w,window_h) < 700) {
+             fontSize = '10px';
+        }
+  if (Math.min(window_w,window_h) >= 700 && Math.min(window_w,window_h) < 750) {
+             fontSize = '11px';
+        }
+  if (Math.min(w.innerWidth,w.innerHeight) >= 750) {
+             fontSize = '12px';
+        }  
+if (window_h > window_w) {
   //alert("shit");
-  var width = (w.innerWidth || e.clientWidth || g.clientWidth)/1.01,
+  var width = window_w/1.01,
       height = width;
 } else {
-  var height = (w.innerHeight || e.clientHeight || g.clientHeight)/1.2 ,
+  var height = window_h/1.01 ,
       width = height;
 }
 
@@ -67,9 +100,6 @@ var vis = div.append("svg")
     .attr("id", "container")
     .attr("transform", "translate(" + [radius + padding, radius + padding] + ")");
 
-div.append("p")
-    .attr("id", "intro")
-    .text("Click to zoom!");
 
 var partition = d3.layout.partition()
     .sort(null)
@@ -85,95 +115,142 @@ var arc = d3.svg.arc()
 d3.json("graph.json", function(error, json) {
 //d3.json("http://localhost:9292/idoc-solar-test.ias.u-psud.fr/project/solar/graph?media=json", function(error, json) {
   d3.select("#container").on("mouseleave", mouseleave);
-  d3.select("#container").on("touchend", mouseleave);
-  json.graph.text = 'Solar';
-  json.graph.children = json.graph.nodeList;
-  var nodes = partition.nodes({children: json.graph.children});
-  var path = vis.selectAll("path").data(nodes);
-  var pathEnter = path.enter().append("path")
-      .attr("id", function(d, i) { return "path-" + i; })
-      .attr("d", arc)
-      .attr("fill-rule", "evenodd")
-      //.style("fill", colour)
-      .style("fill", function(d, i) { if (i==0) return d.color = '#FDB813'; else return d.color = color((d.children ? d : d.parent).text);})
-      .on("mouseover", mouseover)
-      .on("touchenter", mouseover)
-      .on("touchstart", mouseover)
-      .on("click", click);
+        //d3.select("#container").on("touchend", mouseleave);
+        json.graph.text = 'Solar';
+        json.graph.children = json.graph.nodeList;
+        var nodes = partition.nodes({children: json.graph.children});
+        var path = vis.selectAll("path").data(nodes);
+        var pathEnter = path.enter().append("path")
+            .attr("id", function(d, i) { return "path-" + i; })
+            .attr("d", arc)
+            .attr("fill-rule", "evenodd")
+            .style("fill", function(d, i) { if (i==0) return d.color = '#FDB813'; else return d.color = color((d.children ? d : d.parent).text);})
+            .on("mouseover", mouseover)
+            //.on("touchenter", mouseover)
+            //.on("touchstart", mouseover)
+            .on("click", click);
       
-  var tooltips= pathEnter
-    .append("title")
-    .text(function(d) { return d.text });
+        var tooltips= pathEnter
+            .append("title")
+            .text(function(d, i) { if (i != 0) return d.description? d.description : d.text.split('<br/>')[0]; });
 
-  var text = vis.selectAll("text").data(nodes);
-  var textEnter = text.enter().append("text")
-  //var textEnter = pathEnter.append("text")
-      .style("fill-opacity", 1)
-      .style("fill", function(d) {
-        return brightness(d3.rgb(d.color)) < 125 ? "#eee" : "#000";
-      })
-      .attr("text-anchor", function(d, i) {
-        if (i == 0) {
-          return "middle";
+        var text = vis.selectAll("text").data(nodes);
+        var textEnter = text.enter().append("text")
+    .style("fill-opacity", 1)
+              .style("fill", function(d) {
+              return brightness(d3.rgb(d.color)) < 125 ? "#fff" : "#000";
+              })
+              .attr("text-anchor", function(d, i) {
+              if (i == 0) {
+                  return "middle";
+              }
+              return x(d.x + d.dx / 2) > Math.PI ? "end" : "start";
+              })
+              .attr("dy", ".2em")
+              .attr("dx", function(d, i){
+              if (i == 0) return 0;
+              return x(d.x + d.dx / 2) > Math.PI ? "-3em" : "3em";
+              })
+              .attr("transform", function(d, i) {
+              if (i == 0) {
+                  return null;
+              }
+              var multiline = (d.text || "").split(" ").length > 1,
+                  angle = x(d.x + d.dx / 2) * 180 / Math.PI - 90,
+                  rotate = angle + (multiline ? -.5 : 0);
+              return "rotate(" + rotate + ")translate(" + (y(d.y) + padding) + ")rotate(" + (angle > 90 ? -180 : 0) + ")";
+              })
+        .on("click", click);
+  textEnter.append("title")
+                .text(function(d, i) { if (i != 0) return d.description? d.description : d.text.split('<br/>')[0]; });
+        var image = vis.selectAll("image").data(nodes);    
+        imageEnter = image.enter().append("image")
+              .attr("class","dataIconImg")
+              .attr("xlink:href",function(d, i){
+              if (i == 0) return "";
+              else {
+      if (d.type == "node") {
+          if (d.text.search("Query form") > -1)
+        return brightness(d3.rgb(d.color)) < 125 ? "search-white.png" : "search-black.png";
+          else if (d.text.search("Display data") > -1)
+        return brightness(d3.rgb(d.color)) < 125 ? "database-white.png" : "database-black.png";
+          else 
+        return "";
+      }
+      else return brightness(d3.rgb(d.color)) < 125 ? "database-white.png" : "database-black.png";
+              }
+              })
+              .attr('width', "1em")
+              .attr('height', "1em")
+              .style("fill-opacity", 1)
+              .style("fill", function(d) {
+              return brightness(d3.rgb(d.color)) < 125 ? "#fff" : "#000";
+              })
+              .style('cursor','pointer')
+              .attr("y", "-0.5em")
+              .attr("x", function(d){
+              return x(d.x + d.dx / 2) > Math.PI ? "-1.5em" : "0.5em";
+              })
+              .attr("transform", function(d, i) {
+              if (i == 0) {
+                  return null;
+              }
+              var multiline = (d.text || "").split(" ").length > 1,
+                  angle = x(d.x + d.dx / 2) * 180 / Math.PI - 90,
+                  rotate = angle + (multiline ? -.5 : 0);
+              return "rotate(" + rotate + ")translate(" + (y(d.y) + padding) + ")rotate(" + (angle > 90 ? -180 : 0) + ")";
+              })
+              .on("click", function(d,i) { 
+        if (i == 0){
+          return false;
         }
-        return x(d.x + d.dx / 2) > Math.PI ? "end" : "start";
-      })
-      .attr("dy", ".2em")
-      .attr("dx", function(d, i){
-        if (i == 0) return 0;
-        return x(d.x + d.dx / 2) > Math.PI ? "-2em" : "2em";
-      })
-      .attr("transform", function(d, i) {
-        if (i == 0) {
-          return null;
-        }
-        var multiline = (d.text || "").split(" ").length > 1,
-            angle = x(d.x + d.dx / 2) * 180 / Math.PI - 90,
-            rotate = angle + (multiline ? -.5 : 0);
-        return "rotate(" + rotate + ")translate(" + (y(d.y) + padding) + ")rotate(" + (angle > 90 ? -180 : 0) + ")";
-      })
-      .on("click", click);
-  var image = vis.selectAll("image").data(nodes);    
-  var imageEnter = image.enter().append("image")
-      //.attr("xlink:href","#")
-      .attr("xlink:href",function(d, i){
-        if (i == 0) return "";
-        else {
-          return d.type == "node" && (d.text.search("Query form")>-1) ? "1435069352_search.png" : "1435074087_098_Spreadsheet.png";
-        }
-      })
-      .attr('width', "1em")
-      .attr('height', "1em")
-      .style("fill-opacity", 1)
-      .style("fill", function(d) {
-        return brightness(d3.rgb(d.color)) < 125 ? "#eee" : "#000";
-      })
-      .style('cursor','pointer')
-      .attr("y", "-0.5em")
-      .attr("x", function(d){
-        
-        return x(d.x + d.dx / 2) > Math.PI ? "-1.5em" : "0.5em";
-      })
-      .attr("transform", function(d, i) {
-        if (i == 0) {
-          return null;
-        }
-        var multiline = (d.text || "").split(" ").length > 1,
-            angle = x(d.x + d.dx / 2) * 180 / Math.PI - 90,
-            rotate = angle + (multiline ? -.5 : 0);
-        return "rotate(" + rotate + ")translate(" + (y(d.y) + padding) + ")rotate(" + (angle > 90 ? -180 : 0) + ")";
-      })
-      .on("click", function(d,i) { sitools.user.utils.DatasetUtils.clickDatasetIcone('/soho', 'forms'); });
-  var tspan = textEnter.append("tspan")
-      .attr("x", 0)
-      .style("font-weight", function(d, i) { return i == 0 ? "bold" : ""; })
-      .style("font-size", function(d, i) { return i == 0 ? "1.2em" : "1em"; })
-      .text(function(d, i) { if (i == 0) { return 'SOLAR'; } return d.depth ? d.text.split("<br/>")[0] : ""; });
-  
-  /*textEnter.append("tspan")
-      .attr("x", 0)
-      .attr("dy", "1em")
-      .text(function(d) { return d.depth ? d.text.split("<br/>")[0].split(" ")[1] || "" : ""; });*/
+        if (d.type == "node" && (d.text.search("Query form")>-1))
+          sitools.user.utils.DatasetUtils.clickDatasetIcone(d.text.split("clickDatasetIcone('")[1].split(", 'forms'")[0], 'forms');
+        if (d.type == "node" && (d.text.search("Display data")>-1))
+                      sitools.user.utils.DatasetUtils.clickDatasetIcone(d.text.split("clickDatasetIcone('")[1].split("', 'data'")[0], 'data');
+        if (d.type == "dataset")
+          sitools.user.utils.DatasetUtils.clickDatasetIcone(d.url, 'data');
+        return false; 
+        })
+    .on("mouseover", iconhover);
+  function iconhover(d,i) {
+    imageEnter.attr("width", function(e){
+                      if (d.text == e.text) {        
+              return "1.1em";
+          } else {
+          return "1em";
+          }
+                    })
+        .attr("height", function(e){
+      if (d.text == e.text) {    
+                            return "1.1em";
+                        } else {
+                            return "1em";
+                        }
+        });
+      }
+      image.append("svg:title")
+    .text(function(d, i) {
+      if (i == 0) return "";
+                    else {
+                        if (d.type == "node") {
+                            if (d.text.search("Query form") > -1)
+                                return "Query form";
+                            else if (d.text.search("Display data") > -1)
+                                return "Display data";
+                            else
+                                return "";
+                        }
+                        else return "Display data";
+                    }  
+      }); 
+    if (Math.min(window_h, window_w) >= 400){
+      var tspan = textEnter.append("tspan")
+                    .attr("x", 0)
+                    .style("font-weight", function(d, i) { return i == 0 ? "bold" : ""; })
+                    .style("font-size", function(d, i) { return i == 0 ? "1.3vh" : fontSize; })
+                    .text(function(d, i) { if (i == 0) { return 'SOLAR'; } return d.depth ? d.text.split("<br/>")[0] : ""; });
+    }
 
   function click(d) {
     d3.select("#container").on("mouseleave", null);
@@ -260,7 +337,7 @@ d3.json("graph.json", function(error, json) {
       });
     }, 550);     
 
-  	}
+    }
 
 
 });
@@ -374,4 +451,9 @@ function brightness(rgb) {
 
 function size() {
 }
+
+}
+
+
+
 </script>

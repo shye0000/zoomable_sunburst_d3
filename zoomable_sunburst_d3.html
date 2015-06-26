@@ -249,7 +249,7 @@ function draw(json){
       var tspan = textEnter.append("tspan")
         .attr("x", 0)
         .style("font-weight", function(d, i) { return i == 0 ? "bold" : ""; })
-        .style("font-size", function(d, i) { return i == 0 ? "1.3vh" : "1.6vh";})
+        .style("font-size", function(d, i) { return i == 0 ? "1.3vmin" : "1.6vmin";})
         .text(function(d, i) { if (i == 0) { return 'SOLAR'; } return d.depth ? d.text.split("<br/>")[0] : ""; });
     }
 

@@ -77,41 +77,36 @@ function draw(json){
   if (Math.min(w.innerWidth,w.innerHeight) >= 750) {
              fontSize = '12px';
         }  
-if (window_h > window_w) {
-  //alert("shit");
-  var width = window_w/1.01,
-      height = width;
-} else {
-  var height = window_h/1.01 ,
-      width = height;
-}
+  if (window_h > window_w) {
+    var width = window_w/1.01,
+    height = width;
+  } else {
+    var height = window_h/1.01 ,
+    width = height;
+  }
 
-var radius = width / 2,
-    x = d3.scale.linear().range([0, 2 * Math.PI]),
-    y = d3.scale.pow().exponent(1.3).domain([0, 1]).range([0, radius]),
-    padding = 5,
-    duration = 500;
+  var radius = width / 2,
+      x = d3.scale.linear().range([0, 2 * Math.PI]),
+      y = d3.scale.pow().exponent(1.3).domain([0, 1]).range([0, radius]),
+      padding = 5,
+      duration = 500;
 
-var color = d3.scale.category20c();
+  var color = d3.scale.category20c();
 
-var div = d3.select("#vis");
+  var div = d3.select("#vis");
 
-//div.select("img").remove();
-
-var vis = div.append("svg")
+  var vis = div.append("svg")
     .attr("width", width + padding * 2)
     .attr("height", height + padding * 2)
     .append("g")
     .attr("id", "container")
     .attr("transform", "translate(" + [radius + padding, radius + padding] + ")");
 
-
-var partition = d3.layout.partition()
+  var partition = d3.layout.partition()
     .sort(null)
     .value(function(d) { return 5.8 - d.depth; });
-    //.value(function(d) { return Math.sqrt(Math.sqrt(Math.sqrt(Math.sqrt(Math.sqrt(Math.log(d.nbRecord)))))); });
 
-var arc = d3.svg.arc()
+  var arc = d3.svg.arc()
     .startAngle(function(d) { return Math.max(0, Math.min(2 * Math.PI, x(d.x))); })
     .endAngle(function(d) { return Math.max(0, Math.min(2 * Math.PI, x(d.x + d.dx))); })
     .innerRadius(function(d) { return Math.max(0, d.y ? y(d.y) : d.y); })
@@ -120,141 +115,142 @@ var arc = d3.svg.arc()
 //d3.json("graph.json", function(error, json) {
 //d3.json("http://localhost:9292/idoc-solar-test.ias.u-psud.fr/project/solar/graph?media=json", function(error, json) {
   d3.select("#container").on("mouseleave", mouseleave);
-        d3.select("#container").on("touchend", mouseleave);
-        json.graph.text = 'Solar';
-        json.graph.children = json.graph.nodeList;
-        var nodes = partition.nodes({children: json.graph.children});
-        var path = vis.selectAll("path").data(nodes);
-        var pathEnter = path.enter().append("path")
-            .attr("id", function(d, i) { return "path-" + i; })
-            .attr("d", arc)
-            .attr("fill-rule", "evenodd")
-            .style("fill", function(d, i) { if (i==0) return d.color = '#FDB813'; else return d.color = color((d.children ? d : d.parent).text);})
-            .on("mouseover", mouseover)
-            .on("touchenter", mouseover)
-            .on("touchstart", mouseover)
-            .on("click", click);
+  d3.select("#container").on("touchend", mouseleave);
+  json.graph.text = 'Solar';
+  json.graph.children = json.graph.nodeList;
+  var nodes = partition.nodes({children: json.graph.children});
+  var path = vis.selectAll("path").data(nodes);
+  var pathEnter = path.enter().append("path")
+    .attr("id", function(d, i) { return "path-" + i; })
+    .attr("d", arc)
+    .attr("fill-rule", "evenodd")
+    .style("fill", function(d, i) { if (i==0) return d.color = '#FDB813'; else return d.color = color((d.children ? d : d.parent).text);})
+    .on("mouseover", mouseover)
+    .on("touchenter", mouseover)
+    .on("touchstart", mouseover)
+    .on("click", click);
       
-        var tooltips= pathEnter
-            .append("title")
-            .text(function(d, i) { if (i != 0) return d.description? d.description : d.text.split('<br/>')[0]; });
+  var tooltips = pathEnter
+    .append("title")
+    .text(function(d, i) { if (i != 0) return d.description? d.description : d.text.split('<br/>')[0]; });
 
-        var text = vis.selectAll("text").data(nodes);
-        var textEnter = text.enter().append("text")
+  var text = vis.selectAll("text").data(nodes);
+  var textEnter = text.enter().append("text")
     .style("fill-opacity", 1)
-              .style("fill", function(d) {
-              return brightness(d3.rgb(d.color)) < 125 ? "#fff" : "#000";
-              })
-              .attr("text-anchor", function(d, i) {
-              if (i == 0) {
-                  return "middle";
-              }
-              return x(d.x + d.dx / 2) > Math.PI ? "end" : "start";
-              })
-              .attr("dy", ".2em")
-              .attr("dx", function(d, i){
-              if (i == 0) return 0;
-              return x(d.x + d.dx / 2) > Math.PI ? "-3em" : "3em";
-              })
-              .attr("transform", function(d, i) {
-              if (i == 0) {
-                  return null;
-              }
-              var multiline = (d.text || "").split(" ").length > 1,
-                  angle = x(d.x + d.dx / 2) * 180 / Math.PI - 90,
-                  rotate = angle + (multiline ? -.5 : 0);
-              return "rotate(" + rotate + ")translate(" + (y(d.y) + padding) + ")rotate(" + (angle > 90 ? -180 : 0) + ")";
-              })
-        .on("click", click);
-  textEnter.append("title")
-                .text(function(d, i) { if (i != 0) return d.description? d.description : d.text.split('<br/>')[0]; });
-        var image = vis.selectAll("image").data(nodes);    
-        imageEnter = image.enter().append("image")
-              .attr("class","dataIconImg")
-              .attr("xlink:href",function(d, i){
-              if (i == 0) return "";
-              else {
-      if (d.type == "node") {
-          if (d.text.search("Query form") > -1)
-        return brightness(d3.rgb(d.color)) < 125 ? "search-white.png" : "search-black.png";
-          else if (d.text.search("Display data") > -1)
-        return brightness(d3.rgb(d.color)) < 125 ? "database-white.png" : "database-black.png";
-          else 
-        return "";
+    .style("fill", function(d) {
+      return brightness(d3.rgb(d.color)) < 125 ? "#fff" : "#000";
+    })
+    .attr("text-anchor", function(d, i) {
+      if (i == 0) {
+        return "middle";
       }
-      else return brightness(d3.rgb(d.color)) < 125 ? "database-white.png" : "database-black.png";
-              }
-              })
-              .attr('width', "1em")
-              .attr('height', "1em")
-              .style("fill-opacity", 1)
-              .style("fill", function(d) {
-              return brightness(d3.rgb(d.color)) < 125 ? "#fff" : "#000";
-              })
-              .style('cursor','pointer')
-              .attr("y", "-0.5em")
-              .attr("x", function(d){
-              return x(d.x + d.dx / 2) > Math.PI ? "-1.5em" : "0.5em";
-              })
-              .attr("transform", function(d, i) {
-              if (i == 0) {
-                  return null;
-              }
-              var multiline = (d.text || "").split(" ").length > 1,
-                  angle = x(d.x + d.dx / 2) * 180 / Math.PI - 90,
-                  rotate = angle + (multiline ? -.5 : 0);
-              return "rotate(" + rotate + ")translate(" + (y(d.y) + padding) + ")rotate(" + (angle > 90 ? -180 : 0) + ")";
-              })
-              .on("click", function(d,i) { 
-        if (i == 0){
-          return false;
+      return x(d.x + d.dx / 2) > Math.PI ? "end" : "start";
+    })
+    .attr("dy", ".2em")
+    .attr("dx", function(d, i){
+      if (i == 0) return 0;
+      return x(d.x + d.dx / 2) > Math.PI ? "-3em" : "3em";
+    })
+    .attr("transform", function(d, i) {
+      if (i == 0) {
+        return null;
+      }
+      var multiline = (d.text || "").split(" ").length > 1,
+      angle = x(d.x + d.dx / 2) * 180 / Math.PI - 90,
+      rotate = angle + (multiline ? -.5 : 0);
+      return "rotate(" + rotate + ")translate(" + (y(d.y) + padding) + ")rotate(" + (angle > 90 ? -180 : 0) + ")";
+    })
+    .on("click", click);
+  textEnter.append("title")
+    .text(function(d, i) { if (i != 0) return d.description? d.description : d.text.split('<br/>')[0]; });
+  var image = vis.selectAll("image").data(nodes);    
+  imageEnter = image.enter().append("image")
+    .attr("class","dataIconImg")
+    .attr("xlink:href",function(d, i){
+      if (i == 0) return "";
+      else {
+        if (d.type == "node") {
+          if (d.text.search("Query form") > -1)
+            return brightness(d3.rgb(d.color)) < 125 ? "search-white.png" : "search-black.png";
+          else if (d.text.search("Display data") > -1)
+            return brightness(d3.rgb(d.color)) < 125 ? "database-white.png" : "database-black.png";
+          else 
+            return "";
         }
-        if (d.type == "node" && (d.text.search("Query form")>-1))
-          sitools.user.utils.DatasetUtils.clickDatasetIcone(d.text.split("clickDatasetIcone('")[1].split(", 'forms'")[0], 'forms');
-        if (d.type == "node" && (d.text.search("Display data")>-1))
-                      sitools.user.utils.DatasetUtils.clickDatasetIcone(d.text.split("clickDatasetIcone('")[1].split("', 'data'")[0], 'data');
-        if (d.type == "dataset")
-          sitools.user.utils.DatasetUtils.clickDatasetIcone(d.url, 'data');
-        return false; 
-        })
+        else return brightness(d3.rgb(d.color)) < 125 ? "database-white.png" : "database-black.png";
+      }
+    })
+    .attr('width', "1em")
+    .attr('height', "1em")
+    .style("fill-opacity", 1)
+    .style("fill", function(d) {
+      return brightness(d3.rgb(d.color)) < 125 ? "#fff" : "#000";
+    })
+    .style('cursor','pointer')
+    .attr("y", "-0.5em")
+    .attr("x", function(d){
+      return x(d.x + d.dx / 2) > Math.PI ? "-1em" : "0em";
+    })
+    .attr("transform", function(d, i) {
+      if (i == 0) {
+        return null;
+      }
+      var multiline = (d.text || "").split(" ").length > 1,
+      angle = x(d.x + d.dx / 2) * 180 / Math.PI - 90,
+      rotate = angle + (multiline ? -.5 : 0);
+      return "rotate(" + rotate + ")translate(" + (y(d.y) + padding) + ")rotate(" + (angle > 90 ? -180 : 0) + ")";
+    })
+    .on("click", function(d,i) { 
+      if (i == 0){
+        return false;
+      }
+      if (d.type == "node" && (d.text.search("Query form")>-1))
+        sitools.user.utils.DatasetUtils.clickDatasetIcone(d.text.split("clickDatasetIcone('")[1].split(", 'forms'")[0], 'forms');
+      if (d.type == "node" && (d.text.search("Display data")>-1))
+        sitools.user.utils.DatasetUtils.clickDatasetIcone(d.text.split("clickDatasetIcone('")[1].split("', 'data'")[0], 'data');
+      if (d.type == "dataset")
+        sitools.user.utils.DatasetUtils.clickDatasetIcone(d.url, 'data');
+      return false; 
+    })
     .on("mouseover", iconhover);
   function iconhover(d,i) {
+    //alert('ddd');
     imageEnter.attr("width", function(e){
-                      if (d.text == e.text) {        
-              return "1.1em";
-          } else {
+        if (d.text == e.text) {        
+          return "1.1em";
+        } else {
           return "1em";
+        }
+      })
+      .attr("height", function(e){
+        if (d.text == e.text) {    
+           return "1.1em";
+        } else {
+          return "1em";
+        }
+      });
+    }
+    image.append("svg:title")
+      .text(function(d, i) {
+        if (i == 0) return "";
+        else {
+          if (d.type == "node") {
+            if (d.text.search("Query form") > -1)
+              return "Query form";
+            else if (d.text.search("Display data") > -1)
+              return "Display data";
+            else
+              return "";
           }
-                    })
-        .attr("height", function(e){
-      if (d.text == e.text) {    
-                            return "1.1em";
-                        } else {
-                            return "1em";
-                        }
-        });
-      }
-      image.append("svg:title")
-    .text(function(d, i) {
-      if (i == 0) return "";
-                    else {
-                        if (d.type == "node") {
-                            if (d.text.search("Query form") > -1)
-                                return "Query form";
-                            else if (d.text.search("Display data") > -1)
-                                return "Display data";
-                            else
-                                return "";
-                        }
-                        else return "Display data";
-                    }  
+          else return "Display data";
+        }  
       }); 
     if (Math.min(window_h, window_w) >= 400){
       var tspan = textEnter.append("tspan")
-                    .attr("x", 0)
-                    .style("font-weight", function(d, i) { return i == 0 ? "bold" : ""; })
-                    .style("font-size", function(d, i) { return i == 0 ? "1.3vh" : fontSize; })
-                    .text(function(d, i) { if (i == 0) { return 'SOLAR'; } return d.depth ? d.text.split("<br/>")[0] : ""; });
+        .attr("x", 0)
+        .style("font-weight", function(d, i) { return i == 0 ? "bold" : ""; })
+        .style("font-size", function(d, i) { return i == 0 ? "1.3vh" : "1.6vh";})
+        .text(function(d, i) { if (i == 0) { return 'SOLAR'; } return d.depth ? d.text.split("<br/>")[0] : ""; });
     }
 
   function click(d) {
@@ -275,6 +271,7 @@ var arc = d3.svg.arc()
     
     // Somewhat of a hack as we rely on arcTween updating the scales.
     text.style("visibility", function(e) {
+          console.log(this);
           return isParentOf(d, e) ? null : d3.select(this).style("visibility");
         })
       .transition()
@@ -319,7 +316,7 @@ var arc = d3.svg.arc()
         .duration(duration)
         .attr("y", "-0.5em")
         .attr("x", function(d){
-          return x(d.x + d.dx / 2) > Math.PI ? "-1.5em" : "0.5em";
+          return x(d.x + d.dx / 2) > Math.PI ? "-1em" : "0em";
         })
         .attrTween("transform", function(d, i) {
           if (i == 0) {
@@ -338,11 +335,10 @@ var arc = d3.svg.arc()
         });
     setTimeout(function(){ 
       image.attr("x", function(d){
-        return x(d.x + d.dx / 2) > Math.PI ? "-1.5em" : "0.5em";;
+        return x(d.x + d.dx / 2) > Math.PI ? "-1em" : "0em";;
       });
     }, 550);     
-
-    }
+  }
 
 
 //});
@@ -357,22 +353,22 @@ function mouseleave(d) {
 
   // Transition each segment to full opacity and then reactivate it.
   d3.selectAll("path")
-      .transition()
-      .duration(500)
-      .style("opacity", 1)
-      .each("end", function() {
-              d3.select(this).on("mouseover", mouseover);
-              d3.select(this).on("touchstart", mouseover);
-              d3.select(this).on("touchenter", mouseover);
-            });
+    .transition()
+    .duration(500)
+    .style("opacity", 1)
+    .each("end", function() {
+        d3.select(this).on("mouseover", mouseover);
+        d3.select(this).on("touchstart", mouseover);
+        d3.select(this).on("touchenter", mouseover);
+      });
   d3.selectAll("text")
-      .transition()
-      .duration(500)
-      .style("opacity", 1);
+    .transition()
+    .duration(500)
+    .style("opacity", 1);
   d3.selectAll("image")
-      .transition()
-      .duration(500)
-      .style("opacity", 1);    
+    .transition()
+    .duration(500)
+    .style("opacity", 1);    
 }
 
 function mouseover(d) {
@@ -381,27 +377,27 @@ function mouseover(d) {
 
   // Fade all the segments.
   d3.selectAll("path")
-      .style("opacity", 0.3);
+    .style("opacity", 0.3);
   d3.selectAll("text")
-      .style("opacity", 0.3);
+    .style("opacity", 0.3);
   d3.selectAll("image")
-      .style("opacity", 0.3);    
+    .style("opacity", 0.3);    
   // Then highlight only those that are an ancestor of the current segment.
   vis.selectAll("path")
-      .filter(function(node) {
-                return (sequenceArray.indexOf(node) >= 0);
-              })
-      .style("opacity", 1);
+    .filter(function(node) {
+      return (sequenceArray.indexOf(node) >= 0);
+    })
+    .style("opacity", 1);
   vis.selectAll("text")
-      .filter(function(node) {
-                return (sequenceArray.indexOf(node) >= 0);
-              })
-      .style("opacity", 1);
+    .filter(function(node) {
+      return (sequenceArray.indexOf(node) >= 0);
+    })
+    .style("opacity", 1);
   vis.selectAll("image")
-      .filter(function(node) {
-                return (sequenceArray.indexOf(node) >= 0);
-              })
-      .style("opacity", 1);        
+    .filter(function(node) {
+      return (sequenceArray.indexOf(node) >= 0);
+    })
+    .style("opacity", 1);        
 }
 function isParentOf(p, c) {
   if (p === c) return true;

@@ -9,7 +9,7 @@ path {
 }
 text {
     cursor: pointer;
-    font: 1.2vh sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
 }
 body {
     margin: 0 auto;
@@ -76,7 +76,7 @@ function draw(json){
         }
   if (Math.min(w.innerWidth,w.innerHeight) >= 750) {
              fontSize = '12px';
-        }  
+        }
   if (window_h > window_w) {
     var width = window_w/1.01,
     height = width;
@@ -129,7 +129,7 @@ function draw(json){
     .on("touchenter", mouseover)
     .on("touchstart", mouseover)
     .on("click", click);
-      
+
   var tooltips = pathEnter
     .append("title")
     .text(function(d, i) { if (i != 0) return d.description? d.description : d.text.split('<br/>')[0]; });
@@ -149,7 +149,7 @@ function draw(json){
     .attr("dy", ".2em")
     .attr("dx", function(d, i){
       if (i == 0) return 0;
-      return x(d.x + d.dx / 2) > Math.PI ? "-3em" : "3em";
+      return x(d.x + d.dx / 2) > Math.PI ? "-1.2em" : "1.2em";
     })
     .attr("transform", function(d, i) {
       if (i == 0) {
@@ -163,7 +163,7 @@ function draw(json){
     .on("click", click);
   textEnter.append("title")
     .text(function(d, i) { if (i != 0) return d.description? d.description : d.text.split('<br/>')[0]; });
-  var image = vis.selectAll("image").data(nodes);    
+  var image = vis.selectAll("image").data(nodes);
   imageEnter = image.enter().append("image")
     .attr("class","dataIconImg")
     .attr("xlink:href",function(d, i){
@@ -174,7 +174,7 @@ function draw(json){
             return brightness(d3.rgb(d.color)) < 125 ? "search-white.png" : "search-black.png";
           else if (d.text.search("Display data") > -1)
             return brightness(d3.rgb(d.color)) < 125 ? "database-white.png" : "database-black.png";
-          else 
+          else
             return "";
         }
         else return brightness(d3.rgb(d.color)) < 125 ? "database-white.png" : "database-black.png";
@@ -200,7 +200,7 @@ function draw(json){
       rotate = angle + (multiline ? -.5 : 0);
       return "rotate(" + rotate + ")translate(" + (y(d.y) + padding) + ")rotate(" + (angle > 90 ? -180 : 0) + ")";
     })
-    .on("click", function(d,i) { 
+    .on("click", function(d,i) {
       if (i == 0){
         return false;
       }
@@ -210,20 +210,20 @@ function draw(json){
         sitools.user.utils.DatasetUtils.clickDatasetIcone(d.text.split("clickDatasetIcone('")[1].split("', 'data'")[0], 'data');
       if (d.type == "dataset")
         sitools.user.utils.DatasetUtils.clickDatasetIcone(d.url, 'data');
-      return false; 
+      return false;
     })
     .on("mouseover", iconhover);
   function iconhover(d,i) {
     //alert('ddd');
     imageEnter.attr("width", function(e){
-        if (d.text == e.text) {        
+        if (d.text == e.text) {
           return "1.1em";
         } else {
           return "1em";
         }
       })
       .attr("height", function(e){
-        if (d.text == e.text) {    
+        if (d.text == e.text) {
            return "1.1em";
         } else {
           return "1em";
@@ -243,13 +243,13 @@ function draw(json){
               return "";
           }
           else return "Display data";
-        }  
-      }); 
+        }
+      });
     if (Math.min(window_h, window_w) >= 400){
       var tspan = textEnter.append("tspan")
         .attr("x", 0)
         .style("font-weight", function(d, i) { return i == 0 ? "bold" : ""; })
-        .style("font-size", function(d, i) { return i == 0 ? "1.3vmin" : "1.6vmin";})
+        .style("font-size", function(d, i) { return i == 0 ? "1.6vmin" : "1.6vmin";})
         .text(function(d, i) { if (i == 0) { return 'SOLAR'; } return d.depth ? d.text.split("<br/>")[0] : ""; });
     }
 
@@ -262,13 +262,13 @@ function draw(json){
     d3.selectAll("path")
       .style("opacity", 1);
     setTimeout(function(){
-      d3.select("#container").on("mouseleave", mouseleave); 
+      d3.select("#container").on("mouseleave", mouseleave);
       d3.selectAll("path").on("mouseover", mouseover)
         .on("touchstart", mouseover)
         .on("touchenter", mouseover);
 
     }, duration);
-    
+
     // Somewhat of a hack as we rely on arcTween updating the scales.
     text.style("visibility", function(e) {
           console.log(this);
@@ -286,7 +286,7 @@ function draw(json){
         })
         .attr("dx", function(d, i){
             if (i == 0) return 0;
-            else return x(d.x + d.dx / 2) > Math.PI ? "-3em" : "3em";
+            else return x(d.x + d.dx / 2) > Math.PI ? "-1.2em" : "1.2em";
         })
         .attrTween("transform", function(d, i) {
           if (i == 0) {
@@ -303,10 +303,10 @@ function draw(json){
         .each("end", function(e) {
           d3.select(this).style("visibility", isParentOf(d, e) ? null : "hidden");
         });
-    setTimeout(function(){ 
+    setTimeout(function(){
       text.attr("dx", function(d, i){
         if (i == 0) return 0;
-        else return x(d.x + d.dx / 2) > Math.PI ? "-3em" : "3em";
+        else return x(d.x + d.dx / 2) > Math.PI ? "-1.2em" : "1.2em";
       });
     }, 550);
     image.style("visibility", function(e) {
@@ -333,11 +333,11 @@ function draw(json){
         .each("end", function(e) {
           d3.select(this).style("visibility", isParentOf(d, e) ? null : "hidden");
         });
-    setTimeout(function(){ 
+    setTimeout(function(){
       image.attr("x", function(d){
         return x(d.x + d.dx / 2) > Math.PI ? "-1em" : "0em";;
       });
-    }, 550);     
+    }, 550);
   }
 
 
@@ -368,7 +368,7 @@ function mouseleave(d) {
   d3.selectAll("image")
     .transition()
     .duration(500)
-    .style("opacity", 1);    
+    .style("opacity", 1);
 }
 
 function mouseover(d) {
@@ -381,7 +381,7 @@ function mouseover(d) {
   d3.selectAll("text")
     .style("opacity", 0.3);
   d3.selectAll("image")
-    .style("opacity", 0.3);    
+    .style("opacity", 0.3);
   // Then highlight only those that are an ancestor of the current segment.
   vis.selectAll("path")
     .filter(function(node) {
@@ -397,7 +397,7 @@ function mouseover(d) {
     .filter(function(node) {
       return (sequenceArray.indexOf(node) >= 0);
     })
-    .style("opacity", 1);        
+    .style("opacity", 1);
 }
 function isParentOf(p, c) {
   if (p === c) return true;
